@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Meal Desk — an automated employee food polling and billing workflow built with n8n, WhatsApp and Google Sheets. Interactive workflow visualization by Hem." />
+  <title>Meal Desk — Interactive Workflow | Hem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     PROJECT NAV
+     ============================================================ -->
+<nav class="project-nav" role="navigation" aria-label="Project navigation">
+  <div class="pnav-inner">
+    <a href="../../index.html#work" class="back-link" id="back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      Back to projects
+    </a>
+    <span class="pnav-title">Meal Desk</span>
+    <a href="../../index.html" class="pnav-logo" aria-label="Hem portfolio home">HEM<span>.</span></a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     PROJECT HEADER
+     ============================================================ -->
+<header class="project-header" id="project-header">
+  <div class="container">
+
+    <div class="ph-badge-row">
+      <span class="ph-status">Automation workflow</span>
+    </div>
+
+    <h1 class="ph-title">Meal Desk</h1>
+    <p class="ph-subtitle">Food Polling &amp; Billing Automation System</p>
+
+    <p class="ph-desc">
+      An automated employee food polling and billing workflow built with n8n, WhatsApp
+      and Google Sheets. Employees receive a daily poll, respond with YES or NO, and
+      receive a unique code — all without any manual intervention.
+    </p>
+
+    <div class="ph-tech">
+      <span class="tech-badge">n8n</span>
+      <span class="tech-badge">WhatsApp API</span>
+      <span class="tech-badge">Google Sheets</span>
+      <span class="tech-badge">REST API</span>
+      <span class="tech-badge">JavaScript</span>
+      <span class="tech-badge">Webhooks</span>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ============================================================
+     WORKFLOW TIMELINE STEPS
+     ============================================================ -->
+<section class="timeline-section" id="timeline-section" aria-labelledby="timeline-title">
+  <div class="container">
+
+    <div class="tl-header">
+      <p class="section-label">Workflow overview</p>
+      <h2 class="tl-heading" id="timeline-title">DAILY POLL</h2>
+    </div>
+
+    <!-- Steps rendered by JS -->
+    <div id="timeline-steps" class="timeline-steps" role="tablist" aria-label="Workflow phases"></div>
+
+    <p id="timeline-desc" class="tl-desc" role="status" aria-live="polite"></p>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     WORKFLOW CANVAS SECTION
+     ============================================================ -->
+<section class="workflow-section" id="workflow-section" aria-labelledby="ws-title">
+  <div class="ws-header container">
+    <p class="section-label">Interactive workflow</p>
+    <h2 class="ws-title" id="ws-title">See the automation in action.</h2>
+    <p class="ws-subtitle">
+      Click <strong>Run workflow</strong> to watch data move between nodes.
+      Click any node at any time to understand exactly what it does and how it is used.
+    </p>
+
+    <!-- Workflow Selector Tabs -->
+    <div class="workflow-selector" role="tablist" aria-label="Workflow Modules">
+      <button class="ws-tab active" data-workflow="polling" role="tab" aria-selected="true">Food Polling</button>
+      <button class="ws-tab" data-workflow="response" role="tab" aria-selected="false">Employee Response</button>
+      <button class="ws-tab" data-workflow="api" role="tab" aria-selected="false">API / Reporting</button>
+      <button class="ws-tab" data-workflow="billing" role="tab" aria-selected="false">Billing</button>
+    </div>
+  </div>
+
+  <!-- Status + Controls -->
+  <div class="ws-controls container">
+
+    <div class="exec-status" role="status" aria-live="polite">
+      <div class="status-indicator status-idle" id="status-dot" aria-hidden="true"></div>
+      <span class="status-text" id="status-text">WORKFLOW READY</span>
+      <span class="step-counter" id="step-counter">Step 00 / 16</span>
+    </div>
+
+    <p class="status-desc" id="status-desc">Click &ldquo;Run workflow&rdquo; to start the automation, or click any node to explore it.</p>
+
+    <div class="controls-row" role="toolbar" aria-label="Workflow controls">
+
+      <button id="btn-run" class="ctrl-btn ctrl-primary" aria-label="Run workflow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Run workflow
+      </button>
+
+      <button id="btn-pause" class="ctrl-btn ctrl-secondary" style="display:none" aria-label="Pause workflow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
+        </svg>
+        Pause
+      </button>
+
+      <button id="btn-resume" class="ctrl-btn ctrl-secondary" style="display:none" aria-label="Continue workflow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Continue
+      </button>
+
+      <button id="btn-next" class="ctrl-btn ctrl-secondary" style="display:none" aria-label="Next Step">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="5 4 15 12 5 20 5 4"/><rect x="17" y="4" width="3" height="16"/>
+        </svg>
+        Next Step
+      </button>
+
+      <button id="btn-replay" class="ctrl-btn ctrl-secondary" style="display:none" aria-label="Restart workflow">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4"/>
+        </svg>
+        Restart
+      </button>
+
+      <button id="btn-reset" class="ctrl-btn ctrl-ghost" style="display:none" aria-label="Exit Learning Mode">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+        Exit Learning Mode
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Canvas + Info Panel container -->
+  <div class="canvas-area" id="canvas-area">
+
+    <!-- Scrollable canvas -->
+    <div class="canvas-scroll" id="canvas-scroll">
+      <div class="canvas-inner" id="workflow-canvas">
+        <!-- SVG connections — rendered by JS -->
+        <svg id="connections-svg" class="connections-svg" aria-hidden="true"></svg>
+        <!-- Node divs — rendered by JS -->
+        <div id="nodes-container" class="nodes-container"></div>
+      </div>
+    </div>
+
+    <!-- Sliding info panel -->
+    <aside class="info-panel" id="info-panel" aria-label="Node information" aria-live="polite">
+
+      <div class="ip-header">
+        <span class="ip-type" id="panel-type">Node Type</span>
+        <button class="ip-close" id="panel-close" aria-label="Close node information panel">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <h3 class="ip-name" id="panel-name">Node Name</h3>
+
+      <div class="ip-section">
+        <h4 class="ip-section-title">What it does</h4>
+        <p class="ip-section-text" id="panel-what"></p>
+      </div>
+
+      <div class="ip-section">
+        <h4 class="ip-section-title">Why I use it</h4>
+        <p class="ip-section-text" id="panel-why"></p>
+      </div>
+
+      <div class="ip-section">
+        <h4 class="ip-section-title">How I used it</h4>
+        <p class="ip-section-text" id="panel-how"></p>
+      </div>
+
+      <div class="ip-section">
+        <h4 class="ip-section-title">Process</h4>
+        <p class="ip-section-text" id="panel-process"></p>
+      </div>
+
+      <div class="ip-io">
+        <div class="ip-io-item">
+          <h4 class="ip-io-label">Input</h4>
+          <p class="ip-io-text" id="panel-input"></p>
+        </div>
+        <div class="ip-io-item">
+          <h4 class="ip-io-label">Output</h4>
+          <p class="ip-io-text" id="panel-output"></p>
+        </div>
+      </div>
+
+      <div class="ip-section ip-next">
+        <h4 class="ip-section-title">Next Node</h4>
+        <p class="ip-section-text" id="panel-next"></p>
+      </div>
+
+    </aside>
+
+  </div><!-- .canvas-area -->
+
+  <!-- Scroll hint -->
+  <p class="canvas-hint" aria-hidden="true">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+    Scroll horizontally to see the full workflow &middot; Click any node to explore it
+  </p>
+
+</section><!-- #workflow-section -->
+
+
+<!-- ============================================================
+     PROJECT STORY
+     ============================================================ -->
+<section class="project-story" id="story-section" aria-labelledby="story-heading">
+  <div class="container">
+    <div class="story-grid">
+      
+      <div class="story-item">
+        <h3 class="story-title">Problem</h3>
+        <p class="story-text">Food polling and billing required employees and administrators to handle repetitive communication and data updates manually.</p>
+      </div>
+
+      <div class="story-item">
+        <h3 class="story-title">Solution</h3>
+        <p class="story-text">Meal Desk connects scheduled polling, WhatsApp responses, Google Sheets, booking confirmation and billing into one automated workflow.</p>
+      </div>
+
+      <div class="story-item">
+        <h3 class="story-title">Result</h3>
+        <p class="story-text">Employees can respond through WhatsApp while the workflow handles the underlying data processing and booking flow.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TECH STACK
+     ============================================================ -->
+<section class="project-stack" id="tech-section" aria-labelledby="stack-heading">
+  <div class="container">
+
+    <p class="section-label">Technology</p>
+    <h2 id="stack-heading">Built with</h2>
+
+    <div class="stack-items">
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(79,142,247,0.12); color:#4f8ef7" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>n8n</h4>
+          <p>The core workflow engine. All automation logic, scheduling, branching and API calls are built as n8n nodes and connected in a visual workflow canvas.</p>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(37,211,102,0.12); color:#25d366" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>WhatsApp API</h4>
+          <p>Used for both outbound polling messages to employees and inbound response capture via a webhook listener. WhatsApp was chosen because it is already the primary communication tool for employees.</p>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(52,168,83,0.12); color:#34a853" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>Google Sheets</h4>
+          <p>Acts as the database layer — storing the food menu, employee registry, daily responses, confirmed bookings, and billing records. The n8n Google Sheets node reads and writes data in real time.</p>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(251,146,60,0.12); color:#fb923c" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+            <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>Webhooks &amp; REST APIs</h4>
+          <p>Webhooks listen for incoming WhatsApp messages and canteen scan events. The n8n Code node and HTTP Request node handle custom business logic and API calls throughout the workflow.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     BACK TO PORTFOLIO
+     ============================================================ -->
+<div class="back-to-portfolio">
+  <a href="../../index.html#work" id="link-back-portfolio">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Back to all projects
+  </a>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
