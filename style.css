@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    HEM PORTFOLIO — style.css
    ============================================================ */
 
@@ -134,7 +134,7 @@ ul { list-style: none; }
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 60px;
+  height: 72px;
   background: var(--bg-nav);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(16px);

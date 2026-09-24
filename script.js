@@ -101,7 +101,7 @@ function initSmoothScroll() {
       if (!target) return;
       e.preventDefault();
 
-      const navHeight = document.getElementById('navbar')?.offsetHeight || 60;
+      const navHeight = document.getElementById('navbar')?.offsetHeight || 72;
       const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 8;
 
       window.scrollTo({ top, behavior: 'smooth' });
