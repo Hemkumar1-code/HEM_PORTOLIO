@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    AI CROP DISEASE DETECTION — script.js
    ============================================================ */
 
@@ -458,7 +458,7 @@ function updateStatusIndicator() {
     completed: { cls: 'status-completed', label: 'LEARNING MODE COMPLETED' }
   };
   const c = cfg[engine.state] || cfg.idle;
-  dot.className  = 'status-indicator ' + c.cls;
+  dot.className = 'status-indicator ' + c.cls;
   text.textContent = c.label;
 }
 
@@ -505,6 +505,22 @@ function updateAllUI() {
   }
 }
 
+
+/* ============================================================
+   TABS
+   ============================================================ */
+function initTabs() {
+  const tabs = document.querySelectorAll('.ws-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      // Reset engine when switching tabs
+      if (engine.state !== 'idle') engine.exitLearningMode();
+    });
+  });
+}
 /* ============================================================
    CONTROLS INIT & BOOT
    ============================================================ */
@@ -523,6 +539,7 @@ const engine        = new WorkflowEngine(pulseAnimator);
 
 document.addEventListener('DOMContentLoaded', () => {
   renderCanvas();
+  initTabs();
   initControls();
   updateAllUI();
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeInfoPanel(); });
