@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Crop Disease Detection &mdash; Hemkumar Manikandan</title>
+  <meta name="description" content="Farmer uploads a leaf photo. AI detects the disease, explains the cause and delivers treatment steps in Tamil — automatically." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     BACK NAV
+     ============================================================ -->
+<nav class="project-nav" aria-label="Site navigation">
+  <a href="../../index.html" class="back-link" aria-label="Back to portfolio">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Hemkumar Manikandan
+  </a>
+  <div class="nav-right">
+    <a href="../../index.html#work">All Projects</a>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="project-hero" id="hero">
+  <div class="container">
+
+    <div class="hero-meta">
+      <span class="hero-category">AI &middot; Computer Vision &middot; Automation</span>
+      <span class="hero-status">
+        <span class="status-dot"></span>
+        Built &amp; Working
+      </span>
+    </div>
+
+    <h1 class="hero-title">AI Crop Disease<br><span class="accent">Detection</span> &amp; Solution System</h1>
+
+    <p class="hero-desc">
+      A farmer uploads a leaf photo &mdash; the system uses Gemini Vision AI to detect the disease,
+      assess severity, and deliver step-by-step treatment guidance in <strong>Tamil</strong>,
+      with an explainer video. No ML training needed. No agri officer required.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-value">0</span>
+        <span class="stat-label">ML training needed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">Tamil</span>
+        <span class="stat-label">Output language</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">8</span>
+        <span class="stat-label">Workflow nodes</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">Auto</span>
+        <span class="stat-label">End-to-end response</span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- ============================================================
+     PROBLEM / SOLUTION / RESULT
+     ============================================================ -->
+<section class="project-story" id="story-section" aria-labelledby="story-heading">
+  <div class="container">
+    <div class="story-grid">
+
+      <div class="story-item">
+        <h3 class="story-title">Problem</h3>
+        <p class="story-text">When a farmer's crop gets a disease, they don't know what it is, what caused it, or what medicine to apply. Seeing an agri officer takes time; buying medicine based on a shopkeeper's guess risks crop damage.</p>
+      </div>
+
+      <div class="story-item">
+        <h3 class="story-title">Solution</h3>
+        <p class="story-text">Farmer uploads a leaf photo on the website. Gemini Vision AI identifies the crop, disease and severity. An AI Agent then generates full Tamil treatment guidance &mdash; organic remedies, chemical options, prevention tips &mdash; and a video explainer.</p>
+      </div>
+
+      <div class="story-item">
+        <h3 class="story-title">Result</h3>
+        <p class="story-text">Farmers get an instant, accurate diagnosis and actionable steps in their own language. No training data, no ML model &mdash; just AI + automation working together. Future: WhatsApp integration &amp; area-wise disease dashboard.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     INTERACTIVE WORKFLOW
+     ============================================================ -->
+<section class="workflow-section" id="workflow-section" aria-labelledby="wf-heading">
+  <div class="container">
+
+    <div class="wf-header">
+      <div class="wf-title-block">
+        <p class="section-label">n8n Workflow</p>
+        <h2 id="wf-heading">How the automation works.</h2>
+        <p class="wf-subtitle">Click any node to explore what it does, why it&rsquo;s there, and how it connects.</p>
+      </div>
+
+      <!-- Learning Mode Controls -->
+      <div class="learning-controls" id="learning-controls">
+        <div class="status-bar">
+          <span class="status-indicator status-idle" id="status-dot"></span>
+          <span class="status-text" id="status-text">LEARNING MODE READY</span>
+          <span class="step-counter" id="step-counter">Step 00 / 8</span>
+        </div>
+        <p class="status-desc" id="status-desc">Click &ldquo;Run workflow&rdquo; to simulate the automation step by step.</p>
+        <div class="control-btns">
+          <button class="ctrl-btn ctrl-primary" id="btn-run">&#9654; Run workflow</button>
+          <button class="ctrl-btn" id="btn-pause" style="display:none">&#9646;&#9646; Pause</button>
+          <button class="ctrl-btn" id="btn-resume" style="display:none">&#9654; Resume</button>
+          <button class="ctrl-btn" id="btn-next" style="display:none">&#8594; Next step</button>
+          <button class="ctrl-btn" id="btn-replay" style="display:none">&#8635; Replay</button>
+          <button class="ctrl-btn ctrl-danger" id="btn-reset" style="display:none">&#10005; Exit</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Canvas -->
+  <div class="canvas-area" id="canvas-area">
+    <div class="canvas-scroll" id="canvas-scroll">
+      <div class="canvas-inner" id="workflow-canvas">
+        <svg id="connections-svg" class="connections-svg" aria-hidden="true"></svg>
+        <div id="nodes-container" class="nodes-container"></div>
+      </div>
+    </div>
+
+    <!-- Info Panel -->
+    <aside class="info-panel" id="info-panel" aria-label="Node information" aria-live="polite">
+      <div class="ip-header">
+        <span class="ip-type" id="panel-type">Node Type</span>
+        <button class="ip-close" id="panel-close" aria-label="Close panel">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <h3 class="ip-name" id="panel-name">Node Name</h3>
+      <div class="ip-section"><h4 class="ip-section-title">What it does</h4><p class="ip-section-text" id="panel-what"></p></div>
+      <div class="ip-section"><h4 class="ip-section-title">Why I use it</h4><p class="ip-section-text" id="panel-why"></p></div>
+      <div class="ip-section"><h4 class="ip-section-title">How I used it</h4><p class="ip-section-text" id="panel-how"></p></div>
+      <div class="ip-section"><h4 class="ip-section-title">Process</h4><p class="ip-section-text" id="panel-process"></p></div>
+      <div class="ip-io">
+        <div class="ip-io-item"><h4 class="ip-io-label">Input</h4><p class="ip-io-text" id="panel-input"></p></div>
+        <div class="ip-io-item"><h4 class="ip-io-label">Output</h4><p class="ip-io-text" id="panel-output"></p></div>
+      </div>
+      <div class="ip-section ip-next"><h4 class="ip-section-title">Next Node</h4><p class="ip-section-text" id="panel-next"></p></div>
+    </aside>
+  </div>
+
+  <p class="canvas-hint" aria-hidden="true">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+    Scroll horizontally to see the full workflow &middot; Click any node to explore it
+  </p>
+
+</section>
+
+
+<!-- ============================================================
+     TECH STACK
+     ============================================================ -->
+<section class="project-stack" id="tech-section" aria-labelledby="stack-heading">
+  <div class="container">
+
+    <p class="section-label">Technology</p>
+    <h2 id="stack-heading">Built with</h2>
+
+    <div class="stack-items">
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(79,142,247,0.12); color:#4f8ef7" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>n8n</h4>
+          <p>Core workflow engine. Webhook trigger, Gemini API call, IF branching, AI Agent orchestration and response building are all n8n nodes connected in a visual canvas.</p>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(66,133,244,0.12); color:#4285f4" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>Google Gemini (Vision + Language)</h4>
+          <p>Gemini Vision analyzes the uploaded leaf image and returns crop name, disease, severity in JSON. Gemini Chat Model powers the AI Agent that writes full Tamil treatment guidance.</p>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(251,146,60,0.12); color:#fb923c" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+            <line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>Webhook &amp; REST API</h4>
+          <p>The n8n Webhook node receives the farmer's photo from the website via HTTP POST. The HTTP Request node calls the Gemini Vision API with the base64-encoded image.</p>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon" style="background:rgba(74,222,128,0.12); color:#4ade80" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="stack-info">
+          <h4>Website (HTML / JS)</h4>
+          <p>Simple front-end where the farmer selects a leaf photo and submits. The JS reads the file, encodes it and sends it to the n8n webhook. The response (text solution + video) is rendered on the page.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     BACK TO PORTFOLIO
+     ============================================================ -->
+<div class="back-to-portfolio">
+  <a href="../../index.html#work" id="link-back-portfolio">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    Back to all projects
+  </a>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
