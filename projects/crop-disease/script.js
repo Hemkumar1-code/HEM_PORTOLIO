@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    AI CROP DISEASE DETECTION — script.js
    ============================================================ */
 
@@ -258,8 +258,16 @@ function renderCanvas() {
       <div class="wf-node-status" id="status-${node.id}"></div>
     `;
 
-    div.addEventListener('click', () => showInfoPanel(node.id));
-    div.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') showInfoPanel(node.id); });
+    div.addEventListener('click', () => {
+      if (engine.state === 'running') engine.pause();
+      showInfoPanel(node.id);
+    });
+    div.addEventListener('keydown', e => { 
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (engine.state === 'running') engine.pause();
+        showInfoPanel(node.id);
+      }
+    });
     cont.appendChild(div);
   });
 }
@@ -384,6 +392,7 @@ class WorkflowEngine {
     updateStepCounter(idx);
     setStatusDesc(step.label);
     updateStatusIndicator();
+    showInfoPanel(step.nodeId);
 
     this.timer = setTimeout(() => {
       this.animator.setNodeState(step.nodeId, 'done');
