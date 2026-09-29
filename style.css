@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    HEM PORTFOLIO — style.css
    ============================================================ */
 
@@ -134,45 +134,54 @@ ul { list-style: none; }
   left: 0;
   right: 0;
   z-index: 1000;
-  height: 80px;
   background: var(--bg-nav);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   transition: border-color var(--transition);
+  padding: 10px 0 8px;
 }
 
 #navbar.scrolled {
   border-bottom-color: rgba(255,255,255,0.09);
 }
 
-.nav-inner {
-  height: 100%;
+/* Row 1 — Logo centered */
+.nav-logo-row {
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  margin-bottom: 6px;
 }
 
 .nav-logo {
   font-family: var(--font-mono);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--text-primary);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity var(--transition);
 }
 
-.nav-logo span {
-  color: var(--accent);
+.nav-logo:hover { opacity: 0.8; }
+
+/* Row 2 — Links + CTA centered */
+.nav-links-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
 }
 
 .nav-links a {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 500;
   color: var(--text-secondary);
   letter-spacing: 0.02em;
@@ -202,6 +211,28 @@ ul { list-style: none; }
   width: 100%;
 }
 
+/* Hire Me CTA */
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-dim);
+  letter-spacing: 0.03em;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.nav-cta:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 0 14px 2px var(--accent-glow);
+}
+
 /* Hamburger */
 .nav-hamburger {
   display: none;
@@ -229,7 +260,7 @@ ul { list-style: none; }
 .nav-mobile {
   display: none;
   position: fixed;
-  top: 60px;
+  top: 72px;
   left: 0;
   right: 0;
   background: var(--bg-elevated);
@@ -254,12 +285,21 @@ ul { list-style: none; }
 .nav-mobile a:last-child { border-bottom: none; }
 .nav-mobile a:hover, .nav-mobile a.active { color: var(--text-primary); }
 
+.nav-mobile-cta {
+  color: var(--accent) !important;
+  font-weight: 600 !important;
+}
+
+
+
+
 /* ============================================================
    HERO
    ============================================================ */
 #hero {
-  padding-top: 160px;
+  padding-top: 120px;
   padding-bottom: var(--space-3xl);
+
   min-height: 100vh;
   display: flex;
   align-items: center;

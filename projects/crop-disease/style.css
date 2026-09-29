@@ -1097,3 +1097,214 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   filter: drop-shadow(0 0 4px rgba(251,146,60,0.4));
 }
 .conn-dot.conn-active-branch { fill: rgba(251,146,60,0.7) !important; }
+
+/* ============================================================
+   WORKFLOW SECTION — Tabs & Controls (ws- / lm-)
+   ============================================================ */
+
+#workflow-section {
+  padding: var(--space-2xl) 0 0;
+}
+
+/* ── Tabs ── */
+.ws-header {
+  margin-bottom: var(--space-lg);
+}
+
+.ws-tabs {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.ws-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: 0.03em;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.ws-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+
+.ws-tab.active {
+  color: var(--accent);
+  border-color: var(--accent-border);
+  background: var(--accent-dim);
+}
+
+/* ── Learning Mode Controls Bar ── */
+.lm-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-md);
+}
+
+.lm-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.lm-status-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+.lm-step {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.lm-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Buttons row ── */
+.lm-btns {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: 4px;
+}
+
+.lm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.lm-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+/* Primary — Run workflow */
+.lm-btn-primary {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 0 0 0 var(--accent-glow);
+}
+
+.lm-btn-primary:hover {
+  background: #3a7de8;
+  border-color: #3a7de8;
+  color: #fff;
+  box-shadow: 0 0 14px 3px var(--accent-glow);
+}
+
+/* Exit / Reset */
+.lm-btn-exit {
+  color: #f87171;
+  border-color: rgba(248,113,113,0.3);
+  background: rgba(248,113,113,0.07);
+}
+
+.lm-btn-exit:hover {
+  color: #fca5a5;
+  border-color: rgba(248,113,113,0.55);
+  background: rgba(248,113,113,0.13);
+}
+
+/* ── Status Indicator Dot ── */
+.status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-idle      { background: var(--text-muted); }
+.status-running   { background: var(--accent); animation: statusPulse 1s ease-in-out infinite; }
+.status-paused    { background: #f59e0b; }
+.status-completed { background: #4ade80; }
+
+/* ── Canvas area ── */
+.canvas-area {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-canvas);
+  min-height: 420px;
+}
+
+.canvas-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-hover) transparent;
+}
+
+.canvas-scroll::-webkit-scrollbar { height: 5px; }
+.canvas-scroll::-webkit-scrollbar-track { background: transparent; }
+.canvas-scroll::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 10px; }
+
+.canvas-inner {
+  position: relative;
+}
+
+.connections-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.nodes-container {
+  position: relative;
+}
+
+.canvas-hint {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-mono);
+}
+
